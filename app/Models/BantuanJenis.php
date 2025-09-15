@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class BantuanJenis extends Model
+{
+    use HasFactory;
+
+    // The table associated with the model.
+    protected $table = 'bantuan_jenis';
+
+    // The attributes that are mass assignable.
+    protected $fillable = [
+        'nama_bantuan',
+        'sumber_dana',
+        'kriteria',
+        'keterangan',
+    ];
+
+    // The attributes that should be hidden for arrays.
+    protected $hidden = [];
+}
