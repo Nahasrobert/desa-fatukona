@@ -15,8 +15,8 @@
             {!! nl2br(e($berita->isi)) !!}
         </div>
 
-        <div class="mt-4">
+        {{-- <div class="mt-4">
             <a href="{{ url()->previous() }}" class="btn btn-secondary">← Kembali</a>
-        </div>
+        </div> --}}
     </div>
 @endsection

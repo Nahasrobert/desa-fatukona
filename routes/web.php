@@ -29,6 +29,42 @@ use App\Http\Controllers\SettingController;
 // Route untuk login/logout
 Route::get('/', [UserController::class, 'index'])->name('user.dashboard');
 Route::get('/berita/{slug}', [UserController::class, 'show'])->name('berita.show');
+Route::get('peta', [UserController::class, 'peta'])->name('peta');
+Route::get('produk-hukum', [UserController::class, 'produkHukum'])->name('produk-hukum');
+Route::get('/informasi-publik', [UserController::class, 'informasiPublik'])->name('informasi.publik');
+Route::get('/berita', [UserController::class, 'berita'])->name('berita');
+Route::get('/galeri', [UserController::class, 'galeri'])->name('galeri');
+Route::get('/pembangunan', [UserController::class, 'pembangunan'])->name('pembangunan');
+Route::get('/bantuan', [UserController::class, 'bantuan'])->name('bantuan');
+Route::get('/sejarah', [UserController::class, 'sejarah'])->name('sejarah');
+Route::get('/visimisi', [UserController::class, 'visimisi'])->name('visimisi');
+Route::get('/struktur', [UserController::class, 'struktur'])->name('struktur');
+Route::get('/lapak', [UserController::class, 'lapak'])->name('lapak');
+Route::get('/statistik', [UserController::class, 'statistik']);
+Route::get('/apbd', [UserController::class, 'apbd'])->name('apbd');
+Route::get('/pemerintah-desa/{kategori}', [UserController::class, 'aparatur'])->name('pemerintah-desa');
+
+
+
+
+
+
+Route::get('/bantuan', [UserController::class, 'bantuan'])->name('bantuan');
+Route::get('/realisasi', [UserController::class, 'realisasi'])->name('realisasi');
+Route::get('/pengaduan', [UserController::class, 'pengaduan'])->name('pengaduan');
+Route::post('/pengaduan/store', [UserController::class, 'storePengaduan'])->name('pengaduan.store');
+
+
+
+
+
+
+
+
+
+
+
+
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [LoginController::class, 'login'])->name('login.attempt');

@@ -36,9 +36,9 @@
             </div>
 
             <div class="col-md-6">
-                <div class="p-4 sambutan shadow-sm bg-white rounded">
-                    <h5 class="fw-bold mb-3">👨👩 Statistik Jenis Kelamin</h5>
-                    <canvas id="genderChart" height="200"></canvas>
+                <div class="p-4 statistik shadow-sm bg-white rounded">
+                    <h5 class="fw-bold mb-3">👥 Total Penduduk</h5>
+                    <canvas id="totalChart" height="200"></canvas>
                 </div>
             </div>
 
@@ -53,10 +53,10 @@
                     </div>
 
                     <!-- Total Penduduk -->
-                    <div class="mt-4 p-3 bg-light rounded text-center">
+                    {{-- <div class="mt-4 p-3 bg-light rounded text-center">
                         <h6 class="fw-bold mb-1">👥 Total Penduduk</h6>
                         <p class="mb-0 fs-5">{{ $totalPenduduk }} Jiwa</p>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -67,6 +67,7 @@
     <script>
         const laki = {{ $laki }};
         const perempuan = {{ $perempuan }};
+        const totalPenduduk = {{ $totalPenduduk }};
         const pendidikanLabels = @json($pendidikan->keys());
         const pendidikanData = @json($pendidikan->values());
 
@@ -117,7 +118,35 @@
                 }
             }
         });
+
+        // Grafik Total Penduduk - Bar Horizontal
+        new Chart(document.getElementById('totalChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Laki-laki', 'Perempuan', 'Total Penduduk'],
+                datasets: [{
+                    label: 'Jumlah',
+                    data: [laki, perempuan, totalPenduduk],
+                    backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56']
+                }]
+            },
+            options: {
+                responsive: true,
+                indexAxis: 'y',
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
     </script>
+
 
 
 
@@ -128,31 +157,81 @@
             <div class="col-md-6 col-sm-6">
                 <div
                     class="info-box shadow-sm p-4 text-center h-100 rounded-4 border border-light-subtle bg-white hover-effect">
-                    <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="Lokasi" style="width: 60px;"
-                        class="mb-3">
-                    <div
-                        style="border: 1px solid #ccc; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62887.38470542476!2d123.93466946829376!3d-9.89546293588814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2c55c557c4f63aef%3A0x57d6ff73dfd2a943!2sFatukona%2C%20Kec.%20Takari%2C%20Kabupaten%20Kupang%2C%20Nusa%20Tenggara%20Tim.!5e0!3m2!1sid!2sid!4v1757946287108!5m2!1sid!2sid"
-                            width="100%" height="100" style="border: 0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                    <h6 class="fw-bold mb-3">Perkiraan Cuaca Kabupaten Kupang</h6>
+                    <div class="p-3 bg-light rounded-4 border" style="box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);">
+                        <a class="weatherwidget-io" href="https://forecast7.com/en/n10d18123d61/kupang/"
+                            data-label_1="Kabupaten Kupang" data-label_2="Cuaca Sekarang" data-theme="original">
+                            Kabupaten Kupang Cuaca Sekarang
+                        </a>
                     </div>
-
-                    {{-- <p class="mb-0 text-muted">Jl. Andi Makkasau No.12, Bone Bone, Luwu Utara</p> --}}
+                    <script>
+                        ! function(d, s, id) {
+                            var js, fjs = d.getElementsByTagName(s)[0];
+                            if (!d.getElementById(id)) {
+                                js = d.createElement(s);
+                                js.id = id;
+                                js.src = 'https://weatherwidget.io/js/widget.min.js';
+                                fjs.parentNode.insertBefore(js, fjs);
+                            }
+                        }(document, 'script', 'weatherwidget-io-js');
+                    </script>
                 </div>
             </div>
+
+
+
             <div class="col-md-6 col-sm-6">
-                <div
-                    class="info-box shadow-sm p-4 text-center h-100 rounded-4 border border-light-subtle bg-white hover-effect">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2921/2921222.png" alt="Jam Kerja" style="width: 60px;"
-                        class="mb-3">
-                    <h6 class="fw-bold mb-2">Jam Kerja</h6>
-                    <p class="mb-0 text-muted">Senin - Jumat: 08.00 - 16.00 <br>Sabtu - Minggu: Libur</p>
+                <div class="info-box">
+                    <h6>Jam Kerja</h6>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Hari</th>
+                                <th>Mulai</th>
+                                <th>Selesai</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Senin</td>
+                                <td>08:00:00</td>
+                                <td>16:00:00</td>
+                            </tr>
+                            <tr>
+                                <td>Selasa</td>
+                                <td>08:00:00</td>
+                                <td>16:00:00</td>
+                            </tr>
+                            <tr>
+                                <td>Rabu</td>
+                                <td>08:00:00</td>
+                                <td>16:00:00</td>
+                            </tr>
+                            <tr>
+                                <td>Kamis</td>
+                                <td>08:00:00</td>
+                                <td>16:00:00</td>
+                            </tr>
+                            <tr>
+                                <td>Jumat</td>
+                                <td>08:00:00</td>
+                                <td>16:00:00</td>
+                            </tr>
+                            <tr>
+                                <td>Sabtu</td>
+                                <td colspan="2"><span class="libur">Libur</span></td>
+                            </tr>
+                            <tr>
+                                <td>Minggu</td>
+                                <td colspan="2"><span class="libur">Libur</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+
 
 
     <div class="container my-5">
@@ -186,7 +265,57 @@
         </div>
     </div>
 
+    <div class="container my-5">
+        <h3 class="mb-4 fw-bold">📊 Transparansi Anggaran Desa</h3>
 
+        @if ($data->isEmpty())
+            <div class="alert alert-info">Belum ada data anggaran yang tersedia.</div>
+        @else
+            <div class="row g-4">
+                @foreach ($data as $item)
+                    @php
+                        $persen = $item->anggaran > 0 ? round(($item->realisasi / $item->anggaran) * 100, 2) : 0;
+                        $badgeClass = $persen < 50 ? 'danger' : ($persen < 80 ? 'warning' : 'success');
+                    @endphp
+
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="fw-bold">{{ $item->bidang }}</h5>
+                                <p class="mb-1">
+                                    <strong>Tahun:</strong> {{ $item->tahun }}<br>
+                                    <strong>Anggaran:</strong> Rp {{ number_format($item->anggaran, 0, ',', '.') }}<br>
+                                    <strong>Realisasi:</strong> Rp {{ number_format($item->realisasi, 0, ',', '.') }}
+                                </p>
+
+                                <div class="mt-2">
+
+                                    <div class="progress mt-1" style="height: 20px;">
+                                        <div class="progress-bar bg-{{ $badgeClass }} animate-bar"
+                                            data-value="{{ $persen }}" style="width: 0%;" role="progressbar"
+                                            aria-valuenow="{{ $persen }}" aria-valuemin="0" aria-valuemax="100">
+                                            {{ $persen }}%
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                {{-- Optional detail link --}}
+                                {{-- <a href="{{ route('anggaran.show', $item->id) }}" class="btn btn-sm btn-outline-primary mt-auto">Lihat Detail</a> --}}
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <!-- Pagination -->
+            <div class="mt-4 d-flex justify-content-center">
+                {{ $data->links() }}
+            </div>
+        @endif
+
+
+    </div>
 
     {{-- <!-- Layanan Mandiri -->
     <div class="container my-5">
@@ -219,11 +348,13 @@
                                             <h6 class="fw-bold mb-0">{{ $perangkat->jabatan }}</h6>
                                             <p class="text-muted small mb-1">{{ $perangkat->nama }}</p>
                                             @if ($perangkat->periode)
-                                                <p class="text-secondary small mb-0">Periode: {{ $perangkat->periode }}</p>
+                                                <p class="text-secondary small mb-0">Periode :
+                                                    {{ $perangkat->periode }}
+                                                </p>
                                             @endif
-                                            @if ($perangkat->kontak)
+                                            {{-- @if ($perangkat->kontak)
                                                 <p class="text-primary small mb-0">📞 {{ $perangkat->kontak }}</p>
-                                            @endif
+                                            @endif --}}
                                         </div>
                                     </div>
                                 </div>
@@ -231,15 +362,15 @@
                         </div>
                     </div>
                 @endforeach
-
             </div>
-
             <!-- Kontrol Carousel -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#perangkatCarousel" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#perangkatCarousel"
+                data-bs-slide="prev">
                 <span class="carousel-control-prev-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
                 <span class="visually-hidden">Sebelumnya</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#perangkatCarousel" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#perangkatCarousel"
+                data-bs-slide="next">
                 <span class="carousel-control-next-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
                 <span class="visually-hidden">Selanjutnya</span>
             </button>
@@ -257,4 +388,33 @@
             /* Bootstrap primary */
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const bars = document.querySelectorAll('.animate-bar');
+
+            bars.forEach(bar => {
+                const value = bar.getAttribute('data-value');
+                bar.style.width = '0%';
+                bar.style.transition = 'width 1.5s ease-in-out';
+
+                setTimeout(() => {
+                    bar.style.width = value + '%';
+                }, 100);
+            });
+        });
+    </script>
+    <style>
+        .progress-bar {
+            font-weight: bold;
+            font-size: 0.85rem;
+            color: #fff;
+            /* Warna teks putih */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+
+
+
 @endsection

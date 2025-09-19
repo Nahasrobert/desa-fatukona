@@ -480,7 +480,7 @@
         }
 
         .card img {
-            height: 200px;
+            height: 300px;
             object-fit: cover;
         }
 
@@ -523,3 +523,41 @@
                 height: 80px;
             }
         }
+         .info-box {
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        padding: 2rem;
+        text-align: center;
+        height: 100%;
+        border-radius: 1rem;
+        border: 1px solid #f0f0f0;
+        background-color: white;
+        transition: box-shadow 0.3s ease;
+    }
+    .info-box:hover {
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+    .info-box img {
+        width: 60px;
+        margin-bottom: 1rem;
+    }
+    .info-box h6 {
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+    }
+    .table thead th {
+        background-color: #00497a;
+        color: white;
+        text-align: center;
+    }
+    .table tbody td {
+        text-align: center;
+        vertical-align: middle;
+    }
+    .libur {
+        background-color: #f8d7da;
+        color: #842029;
+        font-weight: 600;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        display: inline-block;
+    }

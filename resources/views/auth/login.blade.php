@@ -44,10 +44,12 @@
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4 mx-auto">
                     <div class="card rounded-4 mb-0 border-top border-4 border-primary border-gradient-1">
                         <div class="card-body p-5 text-left">
-                            {{-- <img src="{{ asset('adminx/assets/images/logo1.png') }}" class="mb-4" width="145"
-                                alt="Logo"> --}}
-                            <h4 class="fw-bold mb-2">Masuk</h4>
-                            <p class="mb-4">Silakan login untuk mengakses adminx</p>
+                            <center><img src="{{ asset('adminx/assets/images/logo.png') }}" class="mb-4"
+                                    width="100" alt="Logo"></center>
+
+                            <h4 class="fw-bold mb-2">Login</h4>
+
+                            <p class="mb-4">Silakan login untuk mengakses admin</p>
 
                             <!-- Login Form -->
                             <form class="row g-3" method="POST" action="{{ route('login.attempt') }}" novalidate>

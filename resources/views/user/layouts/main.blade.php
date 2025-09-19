@@ -20,7 +20,10 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
 
     <link href="{{ asset('user/css/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <! </head>
 
@@ -69,21 +72,33 @@
                 <span class="navbar-toggler-icon"><i class="fa fa-bars"></i></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
+
                 <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="/"> <i class="fas fa-home me-1"></i> </a></li>
+
+
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" data-bs-toggle="dropdown">Profil</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Sejarah</a></li>
-                            <li><a class="dropdown-item" href="#">Visi Misi</a></li>
+                            <li><a class="dropdown-item" href="/sejarah">Sejarah</a></li>
+                            <li><a class="dropdown-item" href="/visimisi">Visi Misi</a></li>
+                            <li><a class="dropdown-item" href="/struktur">Struktur Organisasi</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#">Demografi</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Informasi</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Fasilitas</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Indeks Desa</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Layanan</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Galeri</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown">Pemerintah Desa</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/pemerintah-desa/bpd">BPD</a></li>
+                            <li><a class="dropdown-item" href="/pemerintah-desa/linmas">Linmas</a></li>
+                            <li><a class="dropdown-item" href="/pemerintah-desa/pegawai">Pegawai Desa</a></li>
+                            <li><a class="dropdown-item" href="/pemerintah-desa/pkk">PKK</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="/apbd">APBD Desa</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="/statistik">Statistik</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="/lapak">Lapak</a></li>
                 </ul>
             </div>
         </div>
@@ -105,69 +120,96 @@
             </h3>
             <p>{{ $settings['alamat_desa'] ?? 'Alamat belum diatur' }}</p>
 
-            <div class="input-group w-75 mx-auto mt-4">
+            {{-- <div class="input-group w-75 mx-auto mt-4">
                 <input type="text" class="form-control" placeholder="Cari...">
                 <button class="btn btn-warning">Cari</button>
-            </div>
+            </div> --}}
+
             <!-- Quick Menu -->
             <div class="row mt-4 g-3 justify-content-center quick-menu">
-                <div class="col-4 col-md-1">
-                    <div class="card p-2 text-center">
-                        <i class="fa fa-map-marker fa-2x text-warning"></i>
-                        <div class="small mt-2">Peta Desa</div>
+                <a href="/peta" class="col-4 col-md-1 text-decoration-none text-dark">
+                    <div class="col-4 col-md-1">
+                        <div class="card p-2 text-center">
+                            <img src="https://img.icons8.com/color/32/000000/marker.png" alt="Peta Desa" />
+                            <div class="small mt-2" style="font-size: 11px;">Peta Desa</div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-4 col-md-1">
-                    <div class="card p-2 text-center">
-                        <i class="fa fa-map-marker fa-2x text-warning"></i>
-                        <div class="small mt-2">Peta Desa</div>
+                </a>
+                <a href="/produk-hukum" class="col-4 col-md-1 text-decoration-none text-dark">
+
+                    <div class="col-4 col-md-1">
+                        <div class="card p-2 text-center">
+                            <img src="https://img.icons8.com/color/32/000000/scales.png" alt="Produk Hukum" />
+                            <div class="small mt-2" style="font-size: 11px;">Produk Hukum</div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-4 col-md-1">
-                    <div class="card p-2 text-center">
-                        <i class="fa fa-map-marker fa-2x text-warning"></i>
-                        <div class="small mt-2">Peta Desa</div>
+                </a>
+                <a href="/informasi-publik" class="col-4 col-md-1 text-decoration-none text-dark">
+                    <div class="col-4 col-md-1">
+                        <div class="card p-2 text-center">
+                            <img src="https://img.icons8.com/color/32/000000/megaphone.png" alt="Informasi Publik" />
+                            <div class="small mt-2" style="font-size: 11px;">Informasi Publik</div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-4 col-md-1">
-                    <div class="card p-2 text-center">
-                        <i class="fa fa-map-marker fa-2x text-warning"></i>
-                        <div class="small mt-2">Peta Desa</div>
+                </a>
+                <a href="/berita" class="col-4 col-md-1 text-decoration-none text-dark">
+                    <div class="col-4 col-md-1">
+                        <div class="card p-2 text-center">
+                            <img src="https://img.icons8.com/color/32/000000/news.png" alt="Berita" />
+                            <div class="small mt-2" style="font-size: 11px;">Berita</div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-4 col-md-1">
-                    <div class="card p-2 text-center">
-                        <i class="fa fa-map-marker fa-2x text-warning"></i>
-                        <div class="small mt-2">Peta Desa</div>
+                </a>
+                <a href="/galeri" class="col-4 col-md-1 text-decoration-none text-dark">
+
+                    <div class="col-4 col-md-1">
+                        <div class="card p-2 text-center">
+                            <img src="https://img.icons8.com/color/32/000000/picture.png" alt="Galeri" />
+                            <div class="small mt-2" style="font-size: 11px;">Galeri</div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-4 col-md-1">
-                    <div class="card p-2 text-center">
-                        <i class="fa fa-file-alt fa-2x text-success"></i>
-                        <div class="small mt-2">Produk Hukum</div>
+                </a>
+                <a href="/pengaduan" class="col-4 col-md-1 text-decoration-none text-dark">
+
+                    <div class="col-4 col-md-1">
+                        <div class="card p-2 text-center">
+                            <img src="https://img.icons8.com/color/32/000000/complaint.png" alt="Pengaduan" />
+                            <div class="small mt-2" style="font-size: 11px;">Pengaduan</div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-4 col-md-1">
-                    <div class="card p-2 text-center">
-                        <i class="fa fa-info-circle fa-2x text-info"></i>
-                        <div class="small mt-2">Informasi Publik</div>
+                </a>
+                <a href="/pembangunan" class="col-4 col-md-1 text-decoration-none text-dark">
+
+                    <div class="col-4 col-md-1">
+                        <div class="card p-2 text-center">
+                            <img src="https://img.icons8.com/color/32/000000/info--v1.png" alt="Pembangunan" />
+                            <div class="small mt-2" style="font-size: 11px;">Pembangunan</div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-4 col-md-1">
-                    <div class="card p-2 text-center">
-                        <i class="fa fa-shopping-cart fa-2x text-danger"></i>
-                        <div class="small mt-2">Lapak</div>
+                </a>
+                <a href="/bantuan" class="col-4 col-md-1 text-decoration-none text-dark">
+
+                    <div class="col-4 col-md-1">
+                        <div class="card p-2 text-center">
+                            <img src="https://img.icons8.com/color/32/000000/money-bag.png" alt="Penerima Bantuan" />
+                            <div class="small mt-2" style="font-size: 11px;">Penerima Bantuan</div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-4 col-md-1">
-                    <div class="card p-2 text-center">
-                        <i class="fa fa-image fa-2x text-primary"></i>
-                        <div class="small mt-2">Album</div>
+                </a>
+                <a href="/realisasi" class="col-4 col-md-1 text-decoration-none text-dark">
+
+                    <div class="col-4 col-md-1">
+                        <div class="card p-2 text-center">
+                            <img src="https://img.icons8.com/color/32/000000/budget.png" alt="APBD Desa" />
+                            <div class="small mt-2" style="font-size: 11px;">APBD Desa</div>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
+
         </div>
     </section>
+
 
     @yield('content')
 
@@ -230,19 +272,19 @@
     <!-- Bottom Navigation with Flowing Animation -->
     <div class="bottom-nav d-lg-none">
         <div class="nav-indicator"></div> <!-- indikator mengalir -->
-        <a href="#" class="nav-item active" data-index="0">
+        <a href="/" class="nav-item active" data-index="0">
             <i class="fa fa-home"></i><span>Beranda</span>
         </a>
-        <a href="#" class="nav-item" data-index="1">
+        <a href="/peta" class="nav-item" data-index="1">
             <i class="fa fa-map"></i><span>Peta</span>
         </a>
         <a href="#" class="nav-item" data-index="2" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
             <i class="fa fa-bars"></i><span>Menu</span>
         </a>
-        <a href="#" class="nav-item" data-index="3">
+        <a href="/login" class="nav-item" data-index="3">
             <i class="fa fa-sign-in-alt"></i><span>Login</span>
         </a>
-        <a href="#" class="nav-item" data-index="4">
+        <a href="/galeri" class="nav-item" data-index="4">
             <i class="fa fa-image"></i><span>Galeri</span>
         </a>
     </div>
@@ -258,17 +300,26 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Profil</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Sejarah</a></li>
-                        <li><a class="dropdown-item" href="#">Visi Misi</a></li>
+
+                        <li><a class="dropdown-item" href="/sejarah">Sejarah</a></li>
+                        <li><a class="dropdown-item" href="/visimisi">Visi Misi</a></li>
+                        <li><a class="dropdown-item" href="/struktur">Struktur Organisasi</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="#">Demografi</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Informasi</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Fasilitas</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Indeks Desa</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Layanan</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Galeri</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Pemerintah Desa</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/pemerintah-desa/bpd">BPD</a></li>
+                        <li><a class="dropdown-item" href="/pemerintah-desa/linmas">Linmas</a></li>
+                        <li><a class="dropdown-item" href="/pemerintah-desa/pegawai">Pegawai Desa</a></li>
+                        <li><a class="dropdown-item" href="/pemerintah-desa/pkk">PKK</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item"><a class="nav-link" href="/apbd">APBD Desa</a></li>
+                <li class="nav-item"><a class="nav-link" href="/statistik">Statistik</a></li>
+                <li class="nav-item"><a class="nav-link" href="/lapak">Lapak</a></li>
+                <li class="nav-item"><a class="nav-link" href="/galeri">Galeri</a></li>
             </ul>
         </div>
     </div>
@@ -361,6 +412,29 @@
             e.preventDefault();
             document.querySelector("nav.navbar-custom").style.display =
                 document.querySelector("nav.navbar-custom").style.display === "block" ? "none" : "block";
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    {{-- DataTables JS --}}
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#produkHukumTable').DataTable({
+                language: {
+                    search: "Cari:",
+                    lengthMenu: "Tampilkan _MENU_ data",
+                    info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                    paginate: {
+                        first: "Awal",
+                        last: "Akhir",
+                        next: "→",
+                        previous: "←"
+                    },
+                    emptyTable: "Tidak ada data tersedia"
+                }
+            });
         });
     </script>
 </body>
